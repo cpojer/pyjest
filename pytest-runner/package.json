@@ -1,0 +1,10 @@
+{
+  "name": "pytest-runner",
+  "version": "0.0.1",
+  "license": "MIT",
+  "main": "src/index.js",
+  "dependencies": {
+    "chalk": "^2.1.0",
+    "throat": "^4.1.0"
+  }
+}
