@@ -113,10 +113,20 @@ const formatFailureMessage = tests =>
     })
     .join('\n') + '\n';
 
+const getFailureMessages = test => {
+  const failedStage = ["setup", "call", "teardown"].find(
+    stage => stage in test && test[stage].outcome === "failed"
+  );
+
+  if (!failedStage) return [];
+
+  return [failedStage.longrepr];
+};
+
 const toTest = test => ({
   ancestorTitles: [],
   duration: test.duration,
-  failureMessages: test.call.outcome === 'failed' ? [test.call.longrepr] : [],
+  failureMessages: getFailureMessages(test),
   fullName: test.name,
   numPassingAsserts: test.outcome === 'passed' ? 1 : 0,
   status: test.outcome,
